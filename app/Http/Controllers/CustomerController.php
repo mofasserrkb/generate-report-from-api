@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 class CustomerController extends Controller
 {
     //
-    public function getCustomer() {
+    public function getCustomer(Request $request) {
         $response = Http::get('https://raw.githubusercontent.com/Bit-Code-Technologies/mockapi/main/purchase.json');
      // If json is in string decode first
   $data = json_decode($response->getBody(), true); // to array
@@ -21,10 +21,10 @@ class CustomerController extends Controller
     //  dd($data[4]['name']);
     //     dd($response->collect());
     $model = new Customers();
-    
+
     for($key=0;$key<$i;$key++)
     {
-  
+
  $customer= Customers::updateOrCreate([
     'created_at' =>$data[$key]['created_at'],
     'name' =>$data[$key]['name'],
